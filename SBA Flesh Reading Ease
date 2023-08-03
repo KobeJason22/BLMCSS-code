@@ -1,0 +1,23 @@
+program split_string;
+
+uses SysUtils;
+
+var
+  A: TStringArray;
+  inputStr, line: string;
+
+begin
+  word=0
+  writeln('Input the essay: ');
+  readln(inputStr);
+
+  for line in A do
+  begin
+   A := inputStr.Split(' ');
+   lines += line.count(".")
+   word += len(word)
+  end;
+  writeln(line)
+  writeln(word)
+  Readln;
+end.         
