@@ -4,7 +4,8 @@ uses SysUtils;
 
 var
   A: TStringArray;
-  inputStr, line: string;
+  inputStr, line : string;
+  score: integer;
 
 begin
   word=0
@@ -14,10 +15,13 @@ begin
   for line in A do
   begin
    A := inputStr.Split(' ');
-   lines += line.count(".")
-   word += len(word)
+   lines += line.count(".");
+   word += len(word);
   end;
-  writeln(line)
-  writeln(word)
+  writeln(line);
+  writeln(word);
+  score=206.835  – 1.015 * (words/sentences) – 84.6 * (syllables/words);
+  writeln(score);
+
   Readln;
-end.         
+end.                    
