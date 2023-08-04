@@ -1,27 +1,23 @@
-program split_string;
+program project1;
 
 uses SysUtils;
 
 var
-  A: TStringArray;
   inputStr, line : string;
-  score: integer;
+  score: real;
+  i, k: integer;
 
 begin
-  word=0
   writeln('Input the essay: ');
   readln(inputStr);
-
-  for line in A do
+  k:=1;
+  for i:=1 to length(inputStr) do
   begin
-   A := inputStr.Split(' ');
-   lines += line.count(".");
-   word += len(word);
+   if(inputStr[i] = ' ')
+      then k:=k+1;
   end;
-  writeln(line);
-  writeln(word);
-  score=206.835  – 1.015 * (words/sentences) – 84.6 * (syllables/words);
-  writeln(score);
+  writeln(k);
+
 
   Readln;
-end.                    
+end.                   
