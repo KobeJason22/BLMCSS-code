@@ -4,20 +4,28 @@ uses SysUtils;
 
 var
   inputStr, line : string;
-  score: real;
-  i, k: integer;
+  flesch_score: real;
+  i, k, j, p: integer;
 
 begin
   writeln('Input the essay: ');
   readln(inputStr);
   k:=1;
+  j:=0;
+  p:=0;
   for i:=1 to length(inputStr) do
   begin
    if(inputStr[i] = ' ')
       then k:=k+1;
+   if(inputStr[i] = '.')
+      then j:=j+1;
+   if (inputStr[i] = 'a')
+      then p:=p+1;
   end;
-  writeln(k);
+  writeln('Total no. of words : ', k);
+  writeln('Total no. of sentences : ', j);
+  writeln('Total no. of syllables : ', p);
 
 
   Readln;
-end.                   
+end.      
