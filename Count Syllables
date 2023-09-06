@@ -1,6 +1,3 @@
-Sure! Here's a Python program that uses a simple approach to calculate the total number of syllables in a given passage:
-
-```python
 def count_syllables(word):
     count = 0
     vowels = "aeiouyAEIOUY"
@@ -27,8 +24,4 @@ def count_total_syllables(passage):
 passage = input("Enter the passage: ")
 total_syllables = count_total_syllables(passage)
 print("Total syllables:", total_syllables)
-```
 
-In this program, we define two functions. The `count_syllables` function takes a word as input and counts the number of syllables in it using a simple set of rules. The `count_total_syllables` function takes a passage as input, splits it into individual words, and calculates the total number of syllables by calling the `count_syllables` function for each word.
-
-You can run this program and enter your desired passage. It will calculate and display the total number of syllables in the passage.
