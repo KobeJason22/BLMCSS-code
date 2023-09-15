@@ -1,0 +1,18 @@
+program CountLetters;
+var
+  passage: string;
+  count: integer;
+  i: integer;
+begin
+  writeln('Enter the passage:');
+  readln(passage);
+  
+  count := 0;
+  for i := 1 to length(passage) do
+  begin
+    if (passage[i] >= 'A') and (passage[i] <= 'Z') or (passage[i] >= 'a') and (passage[i] <= 'z') then
+      count := count + 1;
+  end;
+  
+  writeln('Number of letters:', count);
+end.
