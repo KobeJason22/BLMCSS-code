@@ -17,7 +17,7 @@ begin
   begin
    if(inputStr[i] = ' ')
       then k:=k+1;
-   if(inputStr[i] = '.')
+   if(inputStr[i] = '.') or (inputStr[i] = '?') or (inputStr[i] = '!')
       then j:=j+1;
     if (inputStr[i] >= 'A') and (inputStr[i] <= 'Z') or (inputStr[i] >= 'a') and (inputStr[i] <= 'z') then
       p := p + 1;
