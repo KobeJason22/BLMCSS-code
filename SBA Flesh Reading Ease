@@ -19,11 +19,14 @@ begin
       then k:=k+1;
    if(inputStr[i] = '.')
       then j:=j+1;
+    if (inputStr[i] >= 'A') and (inputStr[i] <= 'Z') or (inputStr[i] >= 'a') and (inputStr[i] <= 'z') then
+      p := p + 1;
+
 
   end;
   writeln('Total no. of words : ', k);
   writeln('Total no. of sentences : ', j);
-
+  writeln('Total no. of letters : ', p);
 
 
   Readln;
