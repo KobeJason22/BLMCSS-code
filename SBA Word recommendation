@@ -64,7 +64,7 @@ begin
     for j := 0 to High(wordsToMatch) do
     begin
       if CompareText(words[i], wordsToMatch[j]) = 0 then
-        writeln('Match found: "', words[i], '" Recommendation: ', recommendation[j]);
+        writeln('Match found: "', words[i], '" recommendation: ', recommendation[j]);
     end;
   end;
 
@@ -78,7 +78,7 @@ var
 begin
   writeln('Input the essay: ');
   readln(inputStr);
-  wordsToMatch := ['sample', 'words'];
-  recommendation := ['food', 'eat'];
+  wordsToMatch := ['good', 'big'];
+  recommendation := ['satisfactory, excellent, exceptional', 'huge, gigantic, enormous'];
   CheckEssay(inputStr, wordsToMatch, recommendation);
 end.
