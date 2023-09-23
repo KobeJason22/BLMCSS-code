@@ -1,0 +1,84 @@
+program EssayWordMatcher;
+
+uses
+  SysUtils;
+
+type
+  TStringArray = array of string;
+
+function SplitWords(essay: string): TStringArray;
+var
+  words: TStringArray;
+  word: string;
+  i, wordCount: Integer;
+begin
+  wordCount := 0;
+  SetLength(words, wordCount);
+
+  word := '';
+  for i := 1 to Length(essay) do
+  begin
+    if essay[i] = ' ' then
+    begin
+      if word <> '' then
+      begin
+        // Remove the punctuation marks if they exist at the end of the word
+        if (Length(word) > 1) and (word[Length(word)] in ['.', '!', '?', ';']) then
+          Delete(word, Length(word), 1);
+
+        Inc(wordCount);
+        SetLength(words, wordCount);
+        words[wordCount - 1] := word;
+        word := '';
+      end;
+    end
+    else
+      word := word + essay[i];
+  end;
+
+  if word <> '' then
+  begin
+    // Remove the punctuation marks if they exist at the end of the word
+    if (Length(word) > 1) and (word[Length(word)] in ['.', '!', '?', ';']) then
+      Delete(word, Length(word), 1);
+
+    Inc(wordCount);
+    SetLength(words, wordCount);
+    words[wordCount - 1] := word;
+  end;
+
+  SplitWords := words; // Assign the result to the function name
+end;
+
+procedure CheckEssay(const essay: string; const wordsToMatch: TStringArray; const recommendation: TStringArray);
+var
+  words: TStringArray;
+  i, j: Integer;
+begin
+  words := SplitWords(essay);
+
+  writeln('Checking essay for specific words...');
+
+  for i := 0 to High(words) do
+  begin
+    for j := 0 to High(wordsToMatch) do
+    begin
+      if CompareText(words[i], wordsToMatch[j]) = 0 then
+        writeln('Match found: "', words[i], '" Recommendation: ', recommendation[j]);
+    end;
+  end;
+
+  writeln('Essay word matching complete.');
+end;
+
+var
+  inputStr: string;
+  wordsToMatch: TStringArray;
+  recommendation: TStringArray;
+begin
+  writeln('Input the essay: ');
+  readln(inputStr);
+  wordsToMatch := ['sample', 'words'];
+  recommendation := ['food', 'eat'];
+  CheckEssay(inputStr, wordsToMatch, recommendation);
+end.
