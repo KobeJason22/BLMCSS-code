@@ -1,0 +1,145 @@
+program EssayWordMatcher;
+
+uses
+  SysUtils, Classes;
+
+type
+  TStringArray = array of string;
+  TWordCount = record
+    Word: string;
+    Count: Integer;
+  end;
+
+function SplitWords(essay: string): TStringArray;
+var
+  words: TStringArray;
+  word: string;
+  i, wordCount: Integer;
+begin
+  wordCount := 0;
+  SetLength(words, wordCount);
+
+  word := '';
+  for i := 1 to Length(essay) do
+  begin
+    if essay[i] = ' ' then
+    begin
+      if word <> '' then
+      begin
+        // Remove the punctuation marks if they exist at the end of the word
+        if (Length(word) > 1) and (word[Length(word)] in ['.', '!', '?', ';']) then
+          Delete(word, Length(word), 1);
+
+        Inc(wordCount);
+        SetLength(words, wordCount);
+        words[wordCount - 1] := word;
+        word := '';
+      end;
+    end
+    else
+      word := word + essay[i];
+  end;
+
+  if word <> '' then
+  begin
+    // Remove the punctuation marks if they exist at the end of the word
+    if (Length(word) > 1) and (word[Length(word)] in ['.', '!', '?', ';']) then
+      Delete(word, Length(word), 1);
+
+    Inc(wordCount);
+    SetLength(words, wordCount);
+    words[wordCount - 1] := word;
+  end;
+
+  SplitWords := words; // Assign the result to the function name
+end;
+
+function FindMostFrequentWord(const essay: string): string;
+var
+  words: TStringList;
+  wordCounts: array of TWordCount;
+  i, j, maxCount, maxIndex: Integer;
+  mostFrequentWord: string; // Variable to store the result
+begin
+  words := TStringList.Create;
+  words.Delimiter := ' ';
+  words.DelimitedText := essay;
+
+  SetLength(wordCounts, words.Count);
+
+  for i := 0 to words.Count - 1 do
+  begin
+    wordCounts[i].Word := words[i];
+    wordCounts[i].Count := 0;
+  end;
+
+  for i := 0 to words.Count - 1 do
+  begin
+    for j := 0 to words.Count - 1 do
+    begin
+      if CompareText(words[i], wordCounts[j].Word) = 0 then
+        Inc(wordCounts[j].Count);
+    end;
+  end;
+
+  maxCount := 0;
+  maxIndex := -1;
+
+  for i := 0 to Length(wordCounts) - 1 do
+  begin
+    if wordCounts[i].Count > maxCount then
+    begin
+      maxCount := wordCounts[i].Count;
+      maxIndex := i;
+    end;
+  end;
+
+  if maxIndex <> -1 then
+    mostFrequentWord := wordCounts[maxIndex].Word
+  else
+    mostFrequentWord := '';
+
+  words.Free;
+
+  FindMostFrequentWord := mostFrequentWord; // Return the result explicitly
+end;
+
+procedure CheckEssay(const essay: string; const wordsToMatch: TStringArray; const recommendation: TStringArray);
+var
+  words: TStringArray;
+  i, j: Integer;
+begin
+  words := SplitWords(essay);
+
+  writeln('Checking essay for specific words...');
+
+  for i := 0 to High(words) do
+  begin
+    for j := 0 to High(wordsToMatch) do
+    begin
+      if CompareText(words[i], wordsToMatch[j]) = 0 then
+        writeln('Match found: "', words[i], '" recommendation: ', recommendation[j]);
+    end;
+  end;
+
+  writeln('Essay word matching complete.');
+end;
+
+var
+  inputStr: string;
+  wordsToMatch: TStringArray;
+  recommendation: TStringArray;
+  mostFrequentWord: string;
+begin
+  writeln('Input the essay: ');
+  readln(inputStr);
+  wordsToMatch := ['good', 'big'];
+  recommendation := ['satisfactory, excellent, exceptional', 'huge, gigantic, enormous'];
+  CheckEssay(inputStr, wordsToMatch, recommendation);
+  mostFrequentWord := FindMostFrequentWord(inputStr);
+
+  if mostFrequentWord <> '' then
+    writeln('The most frequent word is: ', mostFrequentWord)
+  else
+    writeln('No words found in the essay.');
+end.
