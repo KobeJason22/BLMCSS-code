@@ -142,4 +142,5 @@ begin
     writeln('The most frequent word is: ', mostFrequentWord)
   else
     writeln('No words found in the essay.');
+readln()
 end.
