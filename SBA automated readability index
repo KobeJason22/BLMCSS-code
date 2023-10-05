@@ -18,14 +18,14 @@ begin
   for i := 1 to Length(inputStr) do
   begin
     if inputStr[i] = ' ' then
-      words := words + 1;
+      words := words + 1; //Counting the total number of words
     if inputStr[i] in ['.', '?', '!', ';'] then
-      sentences := sentences + 1;
+      sentences := sentences + 1; //Counting the total number of sentences
     if (inputStr[i] >= 'A') and (inputStr[i] <= 'Z') or (inputStr[i] >= 'a') and (inputStr[i] <= 'z') then
-      letters := letters + 1;
+      letters := letters + 1; //Counting the total number of letters
   end;
 
-  index := (4.17 * letters / words) + (0.5 * words / sentences) - 21.43;
+  index := (4.17 * letters / words) + (0.5 * words / sentences) - 21.43; //Calculating the readability score
 
   writeln('Total no. of words: ', words);
   writeln('Total no. of sentences: ', sentences);
@@ -39,7 +39,7 @@ begin
   else if index < 13 then
     writeln('Secondary level')
   else
-    writeln('College level');
+    writeln('College level'); //Determining the level of the essay
 
   Readln;
 end.
